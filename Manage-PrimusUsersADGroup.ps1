@@ -47,8 +47,7 @@ foreach ($primusUser in $primusUsers)
             {
                 Write-Host "Error adding user $($primusUser.SamAccountName). Reason: $($_.Exception.Message)"
             }
-        }
-        
+        }        
     }
 }
 
