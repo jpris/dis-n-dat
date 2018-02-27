@@ -1,2 +1,2 @@
 # dis-n-dat
-Some miscellaneous codes in PowerShell and Python
+Some miscellaneous scripts in PowerShell and Python
