@@ -10,7 +10,6 @@ $logFile = "$env:TEMP\AD - Manage Primus users AD group memberships.log"
 
 
 $primusUsers = Get-ADUser -Filter {title -eq "koulutus*"} -Properties title| Select SamAccountName, GivenName, Surname, title
-$primusUsers += Get-ADUser -Filter {title -like "yksikönjohtaja"} -Properties title | Select SamAccountName, GivenName, Surname, title
 $primusUsers += Get-ADUser -Filter {title -like "opinto*"} -Properties title | Select SamAccountName, GivenName, Surname, title
 $primusUsersGroupMembers = Get-ADGroupMember -Identity $primusUsersADGroup
 
