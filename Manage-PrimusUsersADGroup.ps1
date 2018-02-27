@@ -45,7 +45,7 @@ foreach ($primusUser in $primusUsers)
             }
             if ($Verbose)
             {
-                Write-Host "Error adding user $($primusUser.SamAccountName). Reason: $($_.Exception.Message)"
+                Write-Host "Error adding user $($primusUser.SamAccountName). Reason: $($_.Exception.Message)" -ForegroundColor Red
             }
         }        
     }
@@ -88,7 +88,7 @@ foreach ($primusGroupMember in $primusUsersGroupMembers)
             } catch {
                 if($Verbose)
                 {
-                    Write-Host "Error adding user $($primusUser.SamAccountName). Reason: $($_.Exception.Message)"
+                    Write-Host "Error adding user $($primusUser.SamAccountName). Reason: $($_.Exception.Message)" -ForegroundColor Red
                 }
 
                 if($Log)
