@@ -7,4 +7,4 @@ Some miscellaneous scripts in PowerShell and Python
 PowerShell script to manage users group membership based on users title
 
 # Get-ChangesInComputerInfo.ps1
-PowerShell script to track computer location and purpose information in asset database
+PowerShell script to track computer location and purpose information changes in asset database
