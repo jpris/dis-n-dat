@@ -3,18 +3,17 @@ Param(
 )
 
 Function checkComputerInfoFromDB($computer, $location, $purpose)
-{
-    
+{    
     $global:totalComputerCounter++
 
     if ($debug)
     {
         Write-Host "Checking Computer:" $computer
     }
+
     $sqlQuery = "SELECT * FROM efecte_computer_locations WHERE (computer_name = '$computer')"
     $MYSQLCommand.CommandText = $sqlQuery
-    $MYSQLDataAdapter.SelectCommand = $MYSQLCommand
-    
+    $MYSQLDataAdapter.SelectCommand = $MYSQLCommand    
     
     $NumberOfDataSets = $MYSQLDataAdapter.Fill($MYSQLDataSet, "data")
 
@@ -105,11 +104,12 @@ Function updateComputerPurposeToDB($computer, $purpose, $oldPurpose)
 $global:logFile = "$env:TEMP\Get-ChangesInComputerLocations.log"
 
 $runCounter = 0
+$computerCount = 0
 $global:totalComputerCounter = 0
 $global:locationUpdateCounter = 0
 $global:purposeUpdateCounter = 0
 
-
+#---------------------Credetials-----------------------------
 $dbUser = "dummyDBUser"
 $dbPwd = "dummyDBPwd"
 $assetUser = "dummyAssetUser"
@@ -126,11 +126,9 @@ $MYSQLDataAdapter = New-Object MySql.Data.MySqlClient.MySqlDataAdapter
 $MYSQLDataSet = New-Object System.Data.DataSet
 $MYSQLCommand.Connection=$Connection
 
-#---------------------Efecte connection---------------------
+#---------------------Asset connection---------------------
 $efecteQuery = "SELECT `$host_name`$,`$node_location`$, `$hallinnollinen_kayttotarkoitus`$ FROM entity WHERE `$state`$ LIKE 'K%yt%ss%' AND entity.folder.name = '1.Tietokone' AND entity.deleted = false AND template.id = '79'"
 $url = "https://dummy.efectecloud.com/api/itsm/search.ws?query=" + $efecteQuery
-
-$computerCount = 0
 
 $webclient = new-object System.Net.WebClient
 $webclient.Credentials = New-Object System.Net.NetworkCredential($assetUser, $assetPwd, "")
@@ -139,8 +137,7 @@ $webclient.Encoding = [System.Text.Encoding]::UTF8
 $efecteReturnXML = [xml]$webclient.DownloadString($url)
 
 if ($efecteReturnXML.HasChildNodes)
-{
-    
+{    
     #Loop thru returned data
     foreach ($computer in $efecteReturnXML.Result.ChildNodes)
     {
