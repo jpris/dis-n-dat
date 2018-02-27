@@ -109,7 +109,7 @@ $global:totalComputerCounter = 0
 $global:locationUpdateCounter = 0
 $global:purposeUpdateCounter = 0
 
-#---------------------Credetials-----------------------------
+#---------------------Credentials-----------------------------
 $dbUser = "dummyDBUser"
 $dbPwd = "dummyDBPwd"
 $assetUser = "dummyAssetUser"
