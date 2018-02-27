@@ -42,6 +42,10 @@ foreach ($primusUser in $primusUsers)
             if($Log){
                 Add-Content -Path $logFile -Value "$(Get-Date) ERROR $($primusUser.SamAccountName) $primusUsersADGroup $($_.Exception.Message)"
             }
+            if ($Verbose)
+            {
+                Write-Host "Error adding user $($primusUser.SamAccountName). Reason: $($_.Exception.Message)"
+            }
         }
         
     }
@@ -81,7 +85,13 @@ foreach ($primusGroupMember in $primusUsersGroupMembers)
                     Add-Content -Path $logFile -Value "$(Get-Date) REMOVE $($primusGroupMember.SamAccountName) from group $primusUsersADGroup"
                 }
             } catch {
-                if($Log){
+                if($Verbose)
+                {
+                    Write-Host "Error adding user $($primusUser.SamAccountName). Reason: $($_.Exception.Message)"
+                }
+
+                if($Log)
+                {
                     Add-Content -Path $logFile -Value "$(Get-Date) ERROR $($primusGroupMember.SamAccountName) $primusUsersADGroup $($_.Exception.Message)"
                 }
             }
