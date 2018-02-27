@@ -39,7 +39,8 @@ foreach ($primusUser in $primusUsers)
             }
         }
         catch {
-            if($Log){
+            if($Log)
+            {
                 Add-Content -Path $logFile -Value "$(Get-Date) ERROR $($primusUser.SamAccountName) $primusUsersADGroup $($_.Exception.Message)"
             }
             if ($Verbose)
@@ -50,6 +51,7 @@ foreach ($primusUser in $primusUsers)
         
     }
 }
+
 if($Verbose)
 {
     Write-Host "------------------------"
@@ -63,7 +65,7 @@ foreach ($primusGroupMember in $primusUsersGroupMembers)
     {
         if($primusUsers.SamAccountName.Contains($primusGroupMember.SamAccountName))
         {   
-            IF($Verbose)
+            If($Verbose)
             {
                 Write-Host "$($primusGroupMember.SamAccountName) is a Primus User" -ForegroundColor Green
             }
